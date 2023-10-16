@@ -1,12 +1,12 @@
 import { BrowserRouter, useRoutes } from "react-router-dom";
-
+import Navbar from "../../Components/Navbar";
+import { ShoppingCartProvider } from "../../Context";
 import Home from "../Home";
 import MyAccount from "../MyAccount";
 import MyOrder from "../MyOrder";
 import MyOrders from "../MyOrders";
-import SignIn from "../SignIn";
 import NotFound from "../NotFound";
-import Navbar from '../../Components/Navbar'
+import SignIn from "../SignIn";
 import "./App.css";
 
 const AppRoutes = () => {
@@ -24,10 +24,12 @@ const AppRoutes = () => {
 
 const App = () => {
 	return (
-		<BrowserRouter>
-			<AppRoutes />
-      <Navbar />
-		</BrowserRouter>
+		<ShoppingCartProvider>
+			<BrowserRouter>
+				<AppRoutes />
+				<Navbar />
+			</BrowserRouter>
+		</ShoppingCartProvider>
 	);
 };
 
