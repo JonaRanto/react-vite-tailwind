@@ -21,24 +21,26 @@ const ProductDetail = () => {
 					/>
 				</div>
 			</div>
-			<figure className="px-6">
-				<img
-					className="w-full h-full rounded-lg"
-					src={context.productToShow.images}
-					alt={context.productToShow.title}
-				/>
-			</figure>
-			<p className="flex flex-col p-6">
-				<span className="font-medium text-2xl mb-2">
-					${context.productToShow.price}
-				</span>
-				<span className="font-medium text-md">
-					${context.productToShow.title}
-				</span>
-				<span className="font-light text-md">
-					${context.productToShow.description}
-				</span>
-			</p>
+			<div className="overflow-y-scroll">
+				<figure className="px-6">
+					<img
+						className="w-full h-full rounded-lg"
+						src={context.productToShow.images}
+						alt={context.productToShow.title}
+					/>
+				</figure>
+				<p className="flex flex-col p-6">
+					<span className="font-medium text-2xl mb-2">
+						${context.productToShow.price}
+					</span>
+					<span className="font-medium text-md">
+						${context.productToShow.title}
+					</span>
+					<span className="font-light text-md">
+						${context.productToShow.description}
+					</span>
+				</p>
+			</div>
 		</aside>
 	);
 };
