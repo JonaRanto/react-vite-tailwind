@@ -26,7 +26,7 @@ const Card = (data) => {
 		if (isInCart) {
 			return (
 				<div className="absolute top-0 right-0 flex justify-center items-center bg-black w-6 h-6 rounded-full m-2 px-0.5 py-0.5">
-					<CheckIcon className="h-6 w-6 text-white" />
+					<CheckIcon className="w-6 h-6 text-white" />
 				</div>
 			);
 		} else {
@@ -35,7 +35,7 @@ const Card = (data) => {
 					className="absolute top-0 right-0 flex justify-center items-center bg-white w-6 h-6 rounded-full m-2 px-0.5 py-0.5"
 					onClick={(event) => addProductsToCart(event, data.data)}
 				>
-					<PlusIcon className="h-6 w-6" />
+					<PlusIcon className="w-6 h-6" />
 				</div>
 			);
 		}

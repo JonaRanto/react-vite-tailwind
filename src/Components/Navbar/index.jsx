@@ -74,7 +74,7 @@ const Navbar = () => {
 					<NavLink to="/sign-in">Sign In</NavLink>
 				</li>
 				<li className="flex items-center">
-					<ShoppingBagIcon className="h-6 w-6" />
+					<ShoppingBagIcon className="w-6 h-6" />
 					{context.count}
 				</li>
 			</ul>

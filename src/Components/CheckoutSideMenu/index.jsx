@@ -28,6 +28,7 @@ const CheckoutSideMenu = () => {
 		context.setOrder([...context.order, orderToAdd]);
 		context.setCartProducts([]);
 		context.setCount(0);
+		context.closeCheckoutSideMenu();
 	};
 
 	return (
@@ -40,7 +41,7 @@ const CheckoutSideMenu = () => {
 				<h2 className="font-medium text-xl">My Order</h2>
 				<div>
 					<XMarkIcon
-						className="h-6 w-6 cursor-pointer"
+						className="w-6 h-6 cursor-pointer"
 						onClick={() => context.closeCheckoutSideMenu()}
 					/>
 				</div>
