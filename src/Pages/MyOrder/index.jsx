@@ -16,11 +16,11 @@ function MyOrder() {
 
 	return (
 		<Layout>
-			<div className="flex w-80 items-center justify-center relative mb-6">
+			<div className="flex w-80 items-center justify-center relative mb-4">
 				<Link to="/my-orders" className="absolute left-0">
 					<ChevronLeftIcon className="w-6 h-6 text-black cursor-pointer" />
 				</Link>
-				<h1> MyOrder </h1>
+				<h1 className="font-medium text-xl">MyOrder</h1>
 			</div>
 			<div className="flex flex-col w-80">
 				{context.order?.[index]?.products.map((product) => (
