@@ -33,10 +33,15 @@ export const ShoppingCartProvider = ({ children }) => {
 	// Get Products by title
 	const [searchByTitle, setSearchByTitle] = useState(null);
 
+	// Get Products by title
+	const [searchByCategory, setSearchByCategory] = useState(null);
+
 	useEffect(() => {
 		fetch(`${apiUrl}/products`)
 			.then((response) => response.json())
-			.then((data) => setItems(data));
+			.then((data) => {
+				setItems(data);
+			});
 	}, []);
 
 	const filteredItemsByTitle = (items, searchByTitle) => {
@@ -45,12 +50,32 @@ export const ShoppingCartProvider = ({ children }) => {
 		);
 	};
 
-	useEffect(() => {
-		console.log("test filtered");
-		if (searchByTitle) {
-			setFilteredItems(filteredItemsByTitle(items, searchByTitle));
+	const filteredItemsByCategory = (items, searchByCategory) => {
+		if (!searchByCategory) {
+			return items;
 		}
-	}, [items, searchByTitle]);
+
+		return items?.filter((item) => {
+			return (
+				item.category.name.toLowerCase() === searchByCategory.toLowerCase()
+			);
+		});
+	};
+
+	useEffect(() => {
+		if (!!searchByTitle) {
+			setFilteredItems(
+				filteredItemsByTitle(
+					!!searchByCategory
+						? filteredItemsByCategory(items, searchByCategory)
+						: items,
+					searchByTitle
+				)
+			);
+		} else if (!!searchByCategory) {
+			setFilteredItems(filteredItemsByCategory(items, searchByCategory));
+		}
+	}, [items, searchByTitle, searchByCategory]);
 
 	return (
 		<ShoppingCartContext.Provider
@@ -70,10 +95,12 @@ export const ShoppingCartProvider = ({ children }) => {
 				order,
 				setOrder,
 				items,
+				filteredItems,
 				setItems,
 				searchByTitle,
 				setSearchByTitle,
-				filteredItems,
+				searchByCategory,
+				setSearchByCategory,
 			}}
 		>
 			{children}

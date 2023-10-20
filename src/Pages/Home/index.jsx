@@ -1,25 +1,30 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Card from "../../Components/Card";
 import Layout from "../../Components/Layout";
 import ProductDetail from "../../Components/ProductDetail";
 import { ShoppingCartContext } from "../../Context";
 
 function Home() {
+	const currentPath = window.location.pathname;
+	let index = currentPath.split("/")[1];
 	const context = useContext(ShoppingCartContext);
 
 	const renderView = () => {
-		if (context.searchByTitle?.length > 0) {
-			if (context.filteredItems?.length > 0) {
-				return context.filteredItems?.map((item) => (
-					<Card key={item.id} data={item} />
-				));
-			} else {
-				return <div>We don't have anything</div>;
-			}
+		const itemsToRender =
+			context.searchByTitle?.length > 0 || !!index
+				? context.filteredItems
+				: context.items;
+
+		if (itemsToRender?.length > 0) {
+			return itemsToRender.map((item) => <Card key={item.id} data={item} />);
 		} else {
-			return context.items?.map((item) => <Card key={item.id} data={item} />);
+			return <div>We don't have anything</div>;
 		}
 	};
+
+	useEffect(() => {
+		context.setSearchByCategory(index);
+	}, [currentPath]);
 
 	return (
 		<Layout>
