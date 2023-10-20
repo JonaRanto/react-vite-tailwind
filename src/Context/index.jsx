@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { apiUrl } from "../Api";
+import { apiUrl } from "../api";
 
 export const ShoppingCartContext = createContext();
 
@@ -92,7 +92,7 @@ export const ShoppingCartProvider = ({ children }) => {
 			);
 		if (!searchByTitle && !searchByCategory)
 			setFilteredItems(filterBy(null, items, searchByTitle, searchByCategory));
-		
+
 	}, [items, searchByTitle, searchByCategory]);
 
 	return (
