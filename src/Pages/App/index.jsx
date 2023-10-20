@@ -13,9 +13,9 @@ import CheckoutSideMenu from "../../Components/CheckoutSideMenu";
 const AppRoutes = () => {
 	let routes = useRoutes([
 		{ path: "/", element: <Home /> },
-		{ path: "/shoes", element: <Home /> },
-		{ path: "/estuches", element: <Home /> },
-		{ path: "/furniture", element: <Home /> },
+		{ path: "/azul", element: <Home /> },
+		{ path: "/iphone", element: <Home /> },
+		{ path: "/gorra", element: <Home /> },
 		{ path: "/m", element: <Home /> },
 		{ path: "/otherss", element: <Home /> },
 		{ path: "/my-account", element: <MyAccount /> },

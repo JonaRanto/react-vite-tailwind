@@ -51,30 +51,47 @@ export const ShoppingCartProvider = ({ children }) => {
 	};
 
 	const filteredItemsByCategory = (items, searchByCategory) => {
-		if (!searchByCategory) {
-			return items;
-		}
+		return items?.filter((item) =>
+			item.category.name.toLowerCase().includes(searchByCategory.toLowerCase())
+		);
+	};
 
-		return items?.filter((item) => {
-			return (
-				item.category.name.toLowerCase() === searchByCategory.toLowerCase()
-			);
-		});
+	const filterBy = (searchType, items, searchByTitle, searchByCategory) => {
+		switch (searchType) {
+			case "BY_TITLE_AND_CATEGORY":
+				return filteredItemsByTitle(
+					filteredItemsByCategory(items, searchByCategory),
+					searchByTitle
+				);
+			case "BY_TITLE":
+				return filteredItemsByTitle(items, searchByTitle);
+			case "BY_CATEGORY":
+				return filteredItemsByCategory(items, searchByCategory);
+			default:
+				return items;
+		}
 	};
 
 	useEffect(() => {
-		if (!!searchByTitle) {
+		if (!!searchByTitle && !!searchByCategory)
 			setFilteredItems(
-				filteredItemsByTitle(
-					!!searchByCategory
-						? filteredItemsByCategory(items, searchByCategory)
-						: items,
-					searchByTitle
+				filterBy(
+					"BY_TITLE_AND_CATEGORY",
+					items,
+					searchByTitle,
+					searchByCategory
 				)
 			);
-		} else if (!!searchByCategory) {
-			setFilteredItems(filteredItemsByCategory(items, searchByCategory));
-		}
+		if (!!searchByTitle && !searchByCategory)
+			setFilteredItems(
+				filterBy("BY_TITLE", items, searchByTitle, searchByCategory)
+			);
+		if (!searchByTitle && !!searchByCategory)
+			setFilteredItems(
+				filterBy("BY_CATEGORY", items, searchByTitle, searchByCategory)
+			);
+		if (!searchByTitle && !searchByCategory)
+			setFilteredItems(filterBy(null, items, searchByTitle, searchByCategory));
 	}, [items, searchByTitle, searchByCategory]);
 
 	return (
